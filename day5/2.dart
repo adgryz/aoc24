@@ -36,11 +36,6 @@ void main() async {
         .map((numbers) => numbers.map((n) => int.parse(n)).toList())
         .toList();
 
-    // preceedingMap.keys.forEach((key) {
-    //   print(key.toString());
-    //   print(preceedingMap[key]);
-    // });
-
     var incorrectPrints = prints.where(
         (print) => !correctOrderPrint(print, followingMap, preceedingMap));
     var correctedPrints = incorrectPrints
