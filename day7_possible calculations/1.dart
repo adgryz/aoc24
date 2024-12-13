@@ -12,20 +12,15 @@ void main() async {
         .map((line) => line.split(': ').toList())
         .map((partitionedLine) => {
               'desiredValue': int.parse(partitionedLine[0]),
-              'elements': partitionedLine[1]
-                  .split(' ')
-                  .map((num) => int.parse(num))
-                  .toList()
+              'elements': partitionedLine[1].split(' ').map((num) => int.parse(num)).toList()
             })
         .toList();
     var result = 0;
     var signsCombinations = generatePossibleSingsCombinations(13, ['+', '*']);
 
     for (var i = 0; i < parts.length; i++) {
-      var currentResult = checkIfCanBeCalculated(
-          parts[i]["desiredValue"] as int,
-          parts[i]['elements'] as List<int>,
-          signsCombinations);
+      var currentResult =
+          checkIfCanBeCalculated(parts[i]["desiredValue"] as int, parts[i]['elements'] as List<int>, signsCombinations);
       if (currentResult != null) {
         result += currentResult;
       }
@@ -37,8 +32,7 @@ void main() async {
   }
 }
 
-int? checkIfCanBeCalculated(
-    int desiredValue, List<int> elements, List<String> signsCombinations) {
+int? checkIfCanBeCalculated(int desiredValue, List<int> elements, List<String> signsCombinations) {
   for (var i = 0; i < signsCombinations.length; i++) {
     var value = calculate(elements, signsCombinations[i], desiredValue);
     if (value == desiredValue) {
@@ -68,8 +62,7 @@ int? calculate(List<int> elements, String signs, int desiredValue) {
   return null;
 }
 
-List<String> generatePossibleSingsCombinations(
-    int length, List<String> inputSigns) {
+List<String> generatePossibleSingsCombinations(int length, List<String> inputSigns) {
   if (length == 0) {
     return inputSigns;
   }
