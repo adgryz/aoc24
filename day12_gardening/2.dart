@@ -77,7 +77,7 @@ void floodTheField(List<List<dynamic>> garden, List<List<bool>> visited, String 
 
 int countCorners(List<List<dynamic>> board, Point current) {
   var curValue = board[current.y][current.x];
-  var wideCorners = [
+  var corners = [
     [
       Point(current.x - 1, current.y),
       Point(current.x - 1, current.y - 1),
@@ -102,20 +102,19 @@ int countCorners(List<List<dynamic>> board, Point current) {
 
   var cornersCount = 0;
 
-  wideCorners.forEach((corner) {
+  corners.forEach((corner) {
     var first = corner[0];
     var diagonal = corner[1];
     var third = corner[2];
 
-    var firstValue = getValue(board, first);
-    var diagonalValue = getValue(board, diagonal);
-    var thirdValue = getValue(board, third);
+    var firstValue = safeValue(board, first);
+    var diagonalValue = safeValue(board, diagonal);
+    var thirdValue = safeValue(board, third);
 
     if (firstValue != curValue && thirdValue != curValue) {
       cornersCount++;
     }
     if (firstValue == curValue && diagonalValue != curValue && thirdValue == curValue) {
-      // print('narrow');
       cornersCount++;
     }
   });
@@ -123,7 +122,7 @@ int countCorners(List<List<dynamic>> board, Point current) {
   return cornersCount;
 }
 
-dynamic getValue(List<List<dynamic>> board, Point current) {
+dynamic safeValue(List<List<dynamic>> board, Point current) {
   if (current.x >= board[0].length || current.y >= board.length || current.x < 0 || current.y < 0) {
     return null;
   }
