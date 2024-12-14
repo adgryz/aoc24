@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import '../day12_gardening/2.dart';
-
 // A - costs 3
 // B - costs 1
 // MAX 100 presses on button per prize
